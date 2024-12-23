@@ -1,2 +1,3 @@
 # Ignore Personal Visual Studio Code Settings
 .vscode
+bin

@@ -7,12 +7,12 @@ using namespace std;
 
 class GraphProcessor {
 private:
-    map<Node *, map<Node *, unsigned int>> allCosts;
+    map<Node *, map<Node *, double>> allCosts;
 
     void dijkstra(Node *startNode);
 
 public:
-    vector<tuple<Node *, Node *, unsigned int, double>> getMostWorthedRoad(vector<Node> &nodes);
+    vector<tuple<Node *, Node *, double, double>> getMostWorthedRoad(vector<Node> &nodes);
 };
 
 #endif

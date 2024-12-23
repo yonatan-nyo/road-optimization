@@ -41,4 +41,4 @@ run: $(TARGET)
 	./$(TARGET)
 
 # Default target (build, clean objects, and run)
-all: build clean-obj run
+all: clean build clean-obj run

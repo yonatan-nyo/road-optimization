@@ -9,10 +9,10 @@ public:
     char code;
     double latitude;
     double longitude;
-    vector<pair<Node *, unsigned int>> neighborsOut;
+    vector<pair<Node *, double>> neighborsOut;
 
     Node(char code, double latitude, double longitude);
-    void addNeighbor(Node *neighbor, unsigned int cost);
+    void addNeighbor(Node *neighbor, double cost);
     double getGeographicalDistanceKM(Node *other);
 };
 

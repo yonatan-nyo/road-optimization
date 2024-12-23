@@ -4,7 +4,7 @@
 Node::Node(char code, double latitude, double longitude)
     : code(code), latitude(latitude), longitude(longitude) {}
 
-void Node::addNeighbor(Node *neighbor, unsigned int cost) {
+void Node::addNeighbor(Node *neighbor, double cost) {
     neighborsOut.push_back({neighbor, cost});
 }
 

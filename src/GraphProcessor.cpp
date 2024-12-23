@@ -3,15 +3,15 @@
 // Dijkstra's algorithm to compute shortest paths from startNode to all other nodes
 void GraphProcessor::dijkstra(Node *startNode) {
     // Priority queue to process nodes by minimum cost (min-heap behavior)
-    priority_queue<pair<unsigned int, Node *>, vector<pair<unsigned int, Node *>>, greater<>> pq;
+    priority_queue<pair<double, Node *>, vector<pair<double, Node *>>, greater<>> pq;
     // Map to store the minimum cost to reach each node
-    map<Node *, unsigned int> visitedCosts;
+    map<Node *, double> visitedCosts;
 
     visitedCosts[startNode] = 0; // Start node cost is 0
     pq.push({0, startNode});     // Push start node to the priority queue
 
     while (!pq.empty()) {
-        unsigned int currentCost = pq.top().first;
+        double currentCost = pq.top().first;
         Node *currentNode = pq.top().second;
         pq.pop(); // Extract the node with the smallest cost
 
@@ -22,8 +22,8 @@ void GraphProcessor::dijkstra(Node *startNode) {
         // Process each neighboring node
         for (auto &neighbor : currentNode->neighborsOut) {
             Node *neighborNode = neighbor.first;
-            unsigned int edgeCost = neighbor.second;
-            unsigned int newCost = currentCost + edgeCost;
+            double edgeCost = neighbor.second;
+            double newCost = currentCost + edgeCost;
 
             // If this path is shorter, update and push to the queue
             if (visitedCosts.find(neighborNode) == visitedCosts.end() || newCost < visitedCosts[neighborNode]) {
@@ -43,7 +43,7 @@ void GraphProcessor::dijkstra(Node *startNode) {
 }
 
 // Process the entire graph by running Dijkstra for each node
-vector<tuple<Node *, Node *, unsigned int, double>> GraphProcessor::getMostWorthedRoad(vector<Node> &nodes) {
+vector<tuple<Node *, Node *, double, double>> GraphProcessor::getMostWorthedRoad(vector<Node> &nodes) {
     allCosts.clear(); // Clear previous results
 
     // Run Dijkstra for each node in the graph
@@ -52,12 +52,12 @@ vector<tuple<Node *, Node *, unsigned int, double>> GraphProcessor::getMostWorth
     }
 
     // Vector to store cost, distance, and node pairs
-    vector<tuple<Node *, Node *, unsigned int, double>> costDistancePairs;
+    vector<tuple<Node *, Node *, double, double>> costDistancePairs;
 
     // Calculate cost and distance between all pairs of nodes
     for (auto &source : allCosts) {
         for (auto &destination : source.second) {
-            unsigned int cost = destination.second;
+            double cost = destination.second;
             double distance = source.first->getGeographicalDistanceKM(destination.first);
             costDistancePairs.push_back({source.first, destination.first, cost, distance});
         }
